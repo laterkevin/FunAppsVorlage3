@@ -24,9 +24,11 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textEditInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/search_term"
+                android:text="@={viewmodel.inputText}"
                 android:maxLines="1"
                 android:textSize="24sp" />
         </com.google.android.material.textfield.TextInputLayout>
