@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import de.syntax_institut.funappsvorlage.adapter.SearchAdapter
 import de.syntax_institut.funappsvorlage.databinding.FragmentSearchBinding
 
 class SearchFragment : Fragment() {
@@ -38,9 +39,13 @@ class SearchFragment : Fragment() {
 
         // Weise der ViewModel Variablen im XML Layout das ViewModel zu
         // TODO
+        viewModel.inputText.value = binding.textInput.toString()
 
         // Beobachte den TextInput und rufe die Daten aus der API ab
         // TODO
+        viewModel.song.observe(viewLifecycleOwner) {
+            binding.rvResults.adapter = SearchAdapter(it)
+        }
 
         // Sobald die Daten aus der API geladen sind, setze einen neuen Adapter der RV
         // TODO
