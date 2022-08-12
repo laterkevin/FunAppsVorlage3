@@ -39,15 +39,18 @@ class SearchFragment : Fragment() {
 
         // Weise der ViewModel Variablen im XML Layout das ViewModel zu
         // TODO
-        viewModel.inputText.value = binding.textInput.toString()
+        binding.viewmodel = viewModel
 
         // Beobachte den TextInput und rufe die Daten aus der API ab
         // TODO
-        viewModel.song.observe(viewLifecycleOwner) {
-            binding.rvResults.adapter = SearchAdapter(it)
+        viewModel.inputText.observe(viewLifecycleOwner) {
+            viewModel.loadData(it)
         }
 
         // Sobald die Daten aus der API geladen sind, setze einen neuen Adapter der RV
         // TODO
+        viewModel.song.observe(viewLifecycleOwner) {
+            binding.rvResults.adapter = SearchAdapter(it)
+        }
     }
 }

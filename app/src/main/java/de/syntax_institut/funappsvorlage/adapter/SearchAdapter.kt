@@ -1,19 +1,23 @@
 package de.syntax_institut.funappsvorlage.adapter
 
-import android.service.autofill.Dataset
 import android.view.LayoutInflater
+import android.view.RoundedCorner
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
+import coil.transform.RoundedCornersTransformation
 import de.syntax_institut.funappsvorlage.R
 import de.syntax_institut.funappsvorlage.data.datamodels.Song
 
 /**
  * Diese Klasse organisiert mithilfe der ViewHolder Klasse das Recycling
  */
-class SearchAdapter(private val dataset: List<Song>) : RecyclerView.Adapter<SearchAdapter.ItemViewHolder>() {
+class SearchAdapter(private val dataset: List<Song>) :
+    RecyclerView.Adapter<SearchAdapter.ItemViewHolder>() {
 
     /**
      * der ViewHolder umfasst die View uns stellt einen Listeneintrag dar
@@ -29,7 +33,6 @@ class SearchAdapter(private val dataset: List<Song>) : RecyclerView.Adapter<Sear
      * hier werden neue ViewHolder erstellt
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
-
         val itemLayout = LayoutInflater.from(parent.context)
             .inflate(R.layout.list_item_result, parent, false)
 
@@ -43,15 +46,19 @@ class SearchAdapter(private val dataset: List<Song>) : RecyclerView.Adapter<Sear
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         // TODO
         val song = dataset[position]
+        val imgUri = song.artworkUrl100.toUri().buildUpon().scheme("https").build()
+
         holder.tvArtist.text = song.artistName
         holder.tvTitle.text = song.trackName
-//        holder.tvPicture.drawable = song.artworkUrl100
+        holder.tvPicture.load(imgUri) {
+            transformations(RoundedCornersTransformation(10f))
+        }
     }
 
     /**
      * damit der LayoutManager weiß, wie lang die Liste ist
      */
     override fun getItemCount(): Int {
-        return TODO()
+        return dataset.size
     }
 }

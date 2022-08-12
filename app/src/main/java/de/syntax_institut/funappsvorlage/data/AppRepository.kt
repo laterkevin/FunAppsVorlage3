@@ -28,8 +28,8 @@ class AppRepository(private var api: SearchApi) {
     // TODO
     suspend fun getResults(search: String) {
         try {
-            val songList = api.retrofitService.getResults(search)
-            _songs.value = songList.songs
+            val songList = api.retrofitService.getResults(search).results
+            _songs.value = songList
         } catch (e: Exception) {
             Log.e(TAG, "Error Data not Loading from API: $e")
         }

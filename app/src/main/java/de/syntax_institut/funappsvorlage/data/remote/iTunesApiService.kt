@@ -1,6 +1,5 @@
 package de.syntax_institut.funappsvorlage.data.remote
 
-import android.app.appsearch.SearchResults
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import de.syntax_institut.funappsvorlage.data.datamodels.SongList
@@ -11,7 +10,7 @@ import retrofit2.http.Query
 
 // Die Konstante enthält die URL der API
 // TODO
-const val BASE_URL = "https://itunes.apple.com"
+const val BASE_URL = "https://itunes.apple.com/"
 
 // Moshi konvertiert Serverantworten in Kotlin Objekte
 // TODO
